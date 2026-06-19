@@ -3,9 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vikrant Bhairav — The Fierce One</title>
+  <title>Vikrant Bhairav — Lord Bhairav Mantra, Katha, Puja Vidhi & Darshan</title>
+  <meta name="description" content="Dedicated to Lord Vikrant Bhairav — a sacred space for Bhairav mantras, chalisa, puja vidhi, katha, and devotee experiences. Share your darshan and spread divine knowledge." />
+  <meta name="keywords" content="Vikrant Bhairav, Lord Bhairav, Bhairav mantra, Bhairav chalisa, Bhairav puja vidhi, Bhairav katha, Bhairav aarti, Kaal Bhairav, Bhairav ashtami, bhairav darshan" />
+  <meta name="author" content="vikrantbhairav.com" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://vikrantbhairav.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikrantbhairav.com/" />
+  <meta property="og:title" content="Vikrant Bhairav — Lord Bhairav Mantra, Katha & Darshan" />
+  <meta property="og:description" content="A sacred space for Lord Bhairav devotees — mantras, chalisa, puja vidhi, katha, and a place to share your divine experiences and pictures." />
+  <meta property="og:image" content="https://vikrantbhairav.com/og-image.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vikrant Bhairav — Lord Bhairav Mantra, Katha & Darshan" />
+  <meta name="twitter:description" content="Mantras, chalisa, puja vidhi, katha, and devotee darshan for Lord Vikrant Bhairav." />
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Vikrant Bhairav",
+    "url": "https://vikrantbhairav.com",
+    "description": "Sacred knowledge about Lord Vikrant Bhairav — mantras, chalisa, puja vidhi, katha and devotee experiences.",
+    "inLanguage": ["en", "hi"]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── HOME-ONLY STYLES ── */
+    .site-nav { position: fixed; }
+
+    .content-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: rgba(200,144,42,0.12);
+      border-top: 1px solid rgba(200,144,42,0.15);
+    }
+    .content-card {
+      background: #060400;
+      padding: 2.5rem 2rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      transition: background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .content-card:hover { background: #0d0800; }
+    .content-card:hover::before { transform: scaleX(1); }
+    .card-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 0 6px var(--gold-glow));
+      line-height: 1;
+    }
+    .card-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      color: var(--crimson);
+      text-transform: uppercase;
+    }
+    .card-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--gold-light);
+      line-height: 1.2;
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.75;
+    }
+    .card-arrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: auto;
+      padding-top: 1rem;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .content-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+  </style>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -414,6 +518,19 @@
 </head>
 <body>
 
+<!-- NAV -->
+<nav class="site-nav">
+  <a class="nav-logo" href="/">॥ Vikrant Bhairav ॥</a>
+  <ul class="nav-links">
+    <li><a href="/mantra/">Mantra</a></li>
+    <li><a href="/chalisa/">Chalisa</a></li>
+    <li><a href="/puja-vidhi/">Puja Vidhi</a></li>
+    <li><a href="/katha/">Katha</a></li>
+    <li><a href="/bhairav-ashtami/">Ashtami</a></li>
+    <li><a href="/darshan/">Darshan</a></li>
+  </ul>
+</nav>
+
 <!-- PARTICLE CANVAS -->
 <canvas id="particle-canvas"></canvas>
 
@@ -561,6 +678,66 @@
 
   <div class="bottom-line"></div>
 </section>
+
+<!-- CONTENT GRID -->
+<div class="content-grid">
+  <a class="content-card" href="/mantra/">
+    <span class="card-icon">🔱</span>
+    <span class="card-label">Sacred Syllables</span>
+    <span class="card-title">Bhairav Mantras</span>
+    <p class="card-desc">Mool mantra, beej mantra, Gayatri, and the complete Kaal Bhairav Ashtakam with Sanskrit, transliteration and meaning.</p>
+    <span class="card-arrow">Explore Mantras →</span>
+  </a>
+  <a class="content-card" href="/chalisa/">
+    <span class="card-icon">📿</span>
+    <span class="card-label">40 Verses</span>
+    <span class="card-title">Bhairav Chalisa</span>
+    <p class="card-desc">Complete Bhairav Chalisa in Hindi — forty devotional verses glorifying the Lord, for daily or Sunday recitation.</p>
+    <span class="card-arrow">Read Chalisa →</span>
+  </a>
+  <a class="content-card" href="/puja-vidhi/">
+    <span class="card-icon">🪔</span>
+    <span class="card-label">Ritual Guide</span>
+    <span class="card-title">Puja Vidhi</span>
+    <p class="card-desc">Step-by-step puja instructions, complete samagri list, Sunday puja, and what to avoid — for home worship.</p>
+    <span class="card-arrow">Learn Puja →</span>
+  </a>
+  <a class="content-card" href="/katha/">
+    <span class="card-icon">📖</span>
+    <span class="card-label">Origin & Significance</span>
+    <span class="card-title">Bhairav Katha</span>
+    <p class="card-desc">The Brahmahatya story, Vikrant Bhairav's meaning, Ashta Bhairav, Kshetrapala, and his eternal presence at Kashi.</p>
+    <span class="card-arrow">Read Katha →</span>
+  </a>
+  <a class="content-card" href="/bhairav-ashtami/">
+    <span class="card-icon">🌑</span>
+    <span class="card-label">Festival & Dates</span>
+    <span class="card-title">Bhairav Ashtami</span>
+    <p class="card-desc">Upcoming dates, significance, fasting rules, night vigil guide, and celebrations at the Kashi temple.</p>
+    <span class="card-arrow">View Dates →</span>
+  </a>
+  <a class="content-card" href="/darshan/">
+    <span class="card-icon">🙏</span>
+    <span class="card-label">Community</span>
+    <span class="card-title">Share Darshan</span>
+    <p class="card-desc">Share your experience, miracle, or temple photos with Lord Bhairav and spread his divine grace with the world.</p>
+    <span class="card-arrow">Share Now →</span>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <span class="footer-om">ॐ</span>
+  <div class="footer-links">
+    <a href="/mantra/">Mantra</a>
+    <a href="/chalisa/">Chalisa</a>
+    <a href="/puja-vidhi/">Puja Vidhi</a>
+    <a href="/katha/">Katha</a>
+    <a href="/bhairav-ashtami/">Ashtami</a>
+    <a href="/darshan/">Darshan</a>
+  </div>
+  <p class="footer-copy">॥ जय भैरव नाथ ॥ &nbsp;·&nbsp; vikrantbhairav.com</p>
+</footer>
 
 <script>
 /* ── POPUP CLOSE ── */
