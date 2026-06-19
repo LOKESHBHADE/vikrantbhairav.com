@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vikrant Bhairav — The Fierce One</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #c8902a;
+      --gold-light: #f0c060;
+      --gold-glow: #ffd700;
+      --deep-red: #8b0000;
+      --crimson: #c0392b;
+      --dark: #080808;
+      --darker: #030303;
+      --text-light: #f5e6c8;
+      --text-dim: #a08060;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--darker);
+      color: var(--text-light);
+      font-family: 'Raleway', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ─── CANVAS PARTICLE BG ─── */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ─── MAIN HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Radial fire glow behind center */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 50% 60%, rgba(180,40,0,0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(100,10,10,0.3) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Top ornamental line */
+    .top-line {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-glow), var(--gold), transparent);
+      box-shadow: 0 0 18px 4px var(--gold-glow);
+    }
+
+    /* ─── SVG MANDALA ─── */
+    .mandala-wrap {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(700px, 92vw);
+      height: min(700px, 92vw);
+      opacity: 0.13;
+      animation: mandala-spin 60s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes mandala-spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    /* ─── TRIDENT SVG ─── */
+    .trident-wrap {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -52%);
+      width: min(420px, 75vw);
+      opacity: 0.07;
+      pointer-events: none;
+      animation: float-pulse 6s ease-in-out infinite;
+    }
+    @keyframes float-pulse {
+      0%,100% { transform: translate(-50%,-52%) translateY(0) scale(1); opacity: 0.07; }
+      50% { transform: translate(-50%,-52%) translateY(-18px) scale(1.02); opacity: 0.11; }
+    }
+
+    /* ─── FLAME RING ─── */
+    .flame-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(520px, 88vw);
+      height: min(520px, 88vw);
+      border-radius: 50%;
+      border: 2px solid rgba(200,80,0,0.25);
+      box-shadow:
+        0 0 40px 8px rgba(200,60,0,0.18),
+        inset 0 0 60px 10px rgba(180,40,0,0.12);
+      animation: ring-pulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .flame-ring-2 {
+      width: min(600px, 95vw);
+      height: min(600px, 95vw);
+      border-color: rgba(200,144,40,0.12);
+      animation-delay: 2s;
+      animation-duration: 5s;
+    }
+    @keyframes ring-pulse {
+      0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%,-50%) scale(1.025); }
+    }
+
+    /* ─── HERO CONTENT ─── */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .sanskrit-top {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.7rem, 1.8vw, 1rem);
+      letter-spacing: 0.55em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      animation: fade-down 1s ease forwards 0.4s;
+    }
+
+    .om-symbol {
+      display: block;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      color: var(--gold-glow);
+      text-shadow: 0 0 30px var(--gold-glow), 0 0 60px rgba(255,200,0,0.4);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fade-down 1s ease forwards 0.7s;
+      line-height: 1;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.8rem, 9vw, 7.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      background: linear-gradient(180deg, #fff8e8 0%, var(--gold-light) 40%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 18px rgba(200,144,42,0.6));
+      opacity: 0;
+      animation: fade-up 1.2s cubic-bezier(0.16,1,0.3,1) forwards 1s;
+    }
+
+    .hero-sub {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 3.5vw, 2rem);
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: var(--crimson);
+      text-shadow: 0 0 18px rgba(192,57,43,0.6);
+      margin-top: 0.5rem;
+      opacity: 0;
+      animation: fade-up 1s ease forwards 1.5s;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      justify-content: center;
+      margin: 2.2rem auto;
+      opacity: 0;
+      animation: fade-up 1s ease forwards 1.8s;
+    }
+    .divider-line {
+      height: 1px;
+      width: min(120px, 25vw);
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .divider-line:last-child {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    .divider-diamond {
+      width: 10px; height: 10px;
+      background: var(--gold-glow);
+      transform: rotate(45deg);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .hero-desc {
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      opacity: 0;
+      animation: fade-up 1s ease forwards 2.1s;
+    }
+
+    /* ─── ATTRIBUTES ROW ─── */
+    .attrs {
+      display: flex;
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+      justify-content: center;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fade-up 1s ease forwards 2.4s;
+    }
+    .attr-item {
+      text-align: center;
+      cursor: default;
+    }
+    .attr-icon {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 0.4rem;
+      filter: drop-shadow(0 0 8px var(--gold-glow));
+      transition: transform 0.3s ease;
+    }
+    .attr-item:hover .attr-icon { transform: scale(1.3); }
+    .attr-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    /* ─── BOTTOM ORNAMENT ─── */
+    .bottom-line {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--deep-red), var(--crimson), var(--deep-red), transparent);
+      box-shadow: 0 0 14px 3px rgba(180,0,0,0.5);
+    }
+
+    /* ─── KEYFRAMES ─── */
+    @keyframes fade-down {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─── POPUP BANNER ─── */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fade-in 0.6s ease forwards;
+      backdrop-filter: blur(6px);
+    }
+    .popup-overlay.hidden {
+      display: none;
+    }
+
+    .popup {
+      position: relative;
+      background:
+        linear-gradient(145deg, #0e0800 0%, #1a0a00 50%, #0a0600 100%);
+      border: 1px solid var(--gold);
+      box-shadow:
+        0 0 0 1px rgba(200,144,42,0.2),
+        0 0 60px 10px rgba(200,80,0,0.3),
+        inset 0 0 40px rgba(100,30,0,0.3);
+      width: min(480px, 92vw);
+      padding: 3rem 2.5rem 2.5rem;
+      text-align: center;
+      overflow: hidden;
+      border-radius: 2px;
+      animation: popup-enter 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes popup-enter {
+      from { transform: scale(0.8) translateY(30px); opacity: 0; }
+      to   { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    /* Corner ornaments */
+    .popup::before, .popup::after {
+      content: '';
+      position: absolute;
+      width: 40px; height: 40px;
+      border-color: var(--gold);
+      border-style: solid;
+    }
+    .popup::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+    .popup::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+    .popup-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      font-family: sans-serif;
+    }
+    .popup-close:hover {
+      background: rgba(200,144,42,0.15);
+      color: var(--gold-glow);
+      transform: rotate(90deg);
+    }
+
+    .popup-om {
+      font-size: 2.8rem;
+      color: var(--gold-glow);
+      text-shadow: 0 0 20px var(--gold-glow);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .popup h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      background: linear-gradient(180deg, #fff8e8 0%, var(--gold-light) 60%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .popup-divider {
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1rem auto;
+    }
+
+    .popup p {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+
+    .popup-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px;
+      background: var(--gold-glow);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--gold-glow);
+      animation: pulse-anim 1.5s infinite;
+    }
+    @keyframes pulse-anim {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+    }
+
+    /* Flame particles inside popup */
+    .popup-flame {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 480px) {
+      .attrs { gap: 1.5rem; }
+      .popup { padding: 2.5rem 1.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- POPUP BANNER -->
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <button class="popup-close" id="popup-close" aria-label="Close">&#x2715;</button>
+
+    <span class="popup-om">ॐ</span>
+
+    <h2>Share Your Darshan</h2>
+
+    <div class="popup-divider"></div>
+
+    <p>
+      Have you witnessed the grace of Lord Vikrant Bhairav?<br/>
+      Share your experiences, miracles, and sacred pictures<br/>
+      to spread his divine knowledge with the world.
+    </p>
+
+    <div class="popup-pulse">
+      <span class="pulse-dot"></span>
+      Your Story Matters
+    </div>
+
+    <div class="popup-flame" id="popup-flame-canvas-wrap">
+      <canvas id="flame-canvas" style="width:100%;height:60px;"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- HERO PAGE -->
+<section class="hero">
+  <div class="top-line"></div>
+
+  <!-- Mandala SVG background -->
+  <div class="mandala-wrap">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g stroke="#c8902a" stroke-width="0.8">
+        <!-- Outer petals -->
+        <circle cx="300" cy="300" r="280"/>
+        <circle cx="300" cy="300" r="250"/>
+        <circle cx="300" cy="300" r="220"/>
+        <circle cx="300" cy="300" r="180"/>
+        <circle cx="300" cy="300" r="140"/>
+        <circle cx="300" cy="300" r="100"/>
+        <circle cx="300" cy="300" r="60"/>
+        <circle cx="300" cy="300" r="20"/>
+        <!-- Radial lines -->
+        <line x1="300" y1="20" x2="300" y2="580"/>
+        <line x1="20" y1="300" x2="580" y2="300"/>
+        <line x1="100" y1="100" x2="500" y2="500"/>
+        <line x1="500" y1="100" x2="100" y2="500"/>
+        <line x1="54" y1="181" x2="546" y2="419"/>
+        <line x1="546" y1="181" x2="54" y2="419"/>
+        <line x1="181" y1="54" x2="419" y2="546"/>
+        <line x1="419" y1="54" x2="181" y2="546"/>
+        <!-- Star of David pattern -->
+        <polygon points="300,30 557,165 557,435 300,570 43,435 43,165" stroke="#c8902a" stroke-width="0.5"/>
+        <polygon points="300,570 557,435 557,165 300,30 43,165 43,435" stroke="#c8902a" stroke-width="0.5" transform="rotate(60 300 300)"/>
+        <!-- Lotus petals (simplified) -->
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(0 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(30 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(60 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(90 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(120 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(150 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(180 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(210 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(240 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(270 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(300 300 300)"/>
+        <ellipse cx="300" cy="170" rx="22" ry="50" transform="rotate(330 300 300)"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Trident / Trishul SVG -->
+  <div class="trident-wrap">
+    <svg viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g fill="#ffd700">
+        <!-- Main staff -->
+        <rect x="94" y="200" width="12" height="280" rx="3"/>
+        <!-- Center prong -->
+        <polygon points="100,20 88,120 112,120"/>
+        <!-- Left prong -->
+        <polygon points="56,50 44,140 68,140"/>
+        <line x1="56" y1="140" x2="94" y2="200" stroke="#ffd700" stroke-width="10"/>
+        <!-- Right prong -->
+        <polygon points="144,50 132,140 156,140"/>
+        <line x1="144" y1="140" x2="106" y2="200" stroke="#ffd700" stroke-width="10"/>
+        <!-- Cross bar -->
+        <rect x="50" y="130" width="100" height="8" rx="3"/>
+        <!-- Base -->
+        <polygon points="88,475 112,475 108,490 92,490"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Flame rings -->
+  <div class="flame-ring"></div>
+  <div class="flame-ring flame-ring-2"></div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <p class="sanskrit-top">॥ जय भैरव नाथ ॥</p>
+    <span class="om-symbol">ॐ</span>
+
+    <h1 class="hero-title">Vikrant<br/>Bhairav</h1>
+    <p class="hero-sub">The Fierce Guardian</p>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <p class="hero-desc">
+      Manifestation of Lord Shiva in his most powerful form — the cosmic destroyer of ignorance, protector of the devoted, and the eternal wanderer of the three worlds. He who carries the trident, guards the boundaries of time itself.
+    </p>
+
+    <div class="attrs">
+      <div class="attr-item">
+        <span class="attr-icon">🔱</span>
+        <span class="attr-label">Trishul</span>
+      </div>
+      <div class="attr-item">
+        <span class="attr-icon">🐕</span>
+        <span class="attr-label">Vahana</span>
+      </div>
+      <div class="attr-item">
+        <span class="attr-icon">🌙</span>
+        <span class="attr-label">Chandra</span>
+      </div>
+      <div class="attr-item">
+        <span class="attr-icon">🔥</span>
+        <span class="attr-label">Agni</span>
+      </div>
+      <div class="attr-item">
+        <span class="attr-icon">💀</span>
+        <span class="attr-label">Kaal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-line"></div>
+</section>
+
+<script>
+/* ── POPUP CLOSE ── */
+document.getElementById('popup-close').addEventListener('click', () => {
+  const overlay = document.getElementById('popup');
+  overlay.style.animation = 'none';
+  overlay.style.transition = 'opacity 0.4s ease, backdrop-filter 0.4s ease';
+  overlay.style.opacity = '0';
+  setTimeout(() => overlay.classList.add('hidden'), 420);
+});
+
+/* ── PARTICLE SYSTEM ── */
+(function(){
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); initParticles(); });
+
+  class Particle {
+    constructor(){
+      this.reset(true);
+    }
+    reset(init){
+      this.x = Math.random() * W;
+      this.y = init ? Math.random() * H : H + 10;
+      this.size = Math.random() * 2 + 0.4;
+      this.speedY = -(Math.random() * 0.6 + 0.2);
+      this.speedX = (Math.random() - 0.5) * 0.4;
+      this.life = Math.random();
+      this.maxLife = Math.random() * 0.6 + 0.4;
+      this.color = Math.random() < 0.5 ? 'gold' : (Math.random() < 0.5 ? '#c8902a' : '#ff6a00');
+    }
+    update(){
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.life += 0.003;
+      if(this.life > this.maxLife || this.y < -10) this.reset(false);
+    }
+    draw(){
+      const alpha = Math.sin((this.life / this.maxLife) * Math.PI) * 0.7;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 6;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function initParticles(){
+    particles = Array.from({length: 180}, () => new Particle());
+  }
+
+  function loop(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+
+  initParticles();
+  loop();
+})();
+
+/* ── FLAME CANVAS IN POPUP ── */
+(function(){
+  const canvas = document.getElementById('flame-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize(){
+    W = canvas.width = canvas.offsetWidth || 480;
+    H = canvas.height = 60;
+  }
+  resize();
+
+  const flames = Array.from({length: 30}, () => ({
+    x: Math.random() * 480,
+    y: 60,
+    vy: -(Math.random() * 1.5 + 0.5),
+    vx: (Math.random() - 0.5) * 0.8,
+    life: Math.random(),
+    maxLife: Math.random() * 0.5 + 0.5,
+    size: Math.random() * 8 + 4,
+  }));
+
+  function flameLoop(){
+    ctx.clearRect(0, 0, W, H);
+    flames.forEach(f => {
+      f.x += f.vx; f.y += f.vy; f.life += 0.015;
+      if(f.life > f.maxLife){ f.x = Math.random() * W; f.y = 65; f.life = 0; }
+      const t = f.life / f.maxLife;
+      const alpha = (1 - t) * 0.7;
+      const g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.size * (1 - t * 0.5));
+      g.addColorStop(0, `rgba(255,220,60,${alpha})`);
+      g.addColorStop(0.4, `rgba(255,80,0,${alpha * 0.8})`);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.size * (1 - t * 0.5), 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+    });
+    requestAnimationFrame(flameLoop);
+  }
+  flameLoop();
+})();
+
+/* ── MOUSE PARALLAX ── */
+document.addEventListener('mousemove', e => {
+  const xRatio = (e.clientX / window.innerWidth - 0.5) * 2;
+  const yRatio = (e.clientY / window.innerHeight - 0.5) * 2;
+  const mandala = document.querySelector('.mandala-wrap');
+  const ring = document.querySelector('.flame-ring');
+  if(mandala) mandala.style.transform = `translate(calc(-50% + ${xRatio * 12}px), calc(-50% + ${yRatio * 12}px))`;
+  if(ring) ring.style.transform = `translate(calc(-50% + ${xRatio * 6}px), calc(-50% + ${yRatio * 6}px))`;
+});
+</script>
+</body>
+</html>
