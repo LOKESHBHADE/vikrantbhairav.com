@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Share Your Darshan — Devotee Experiences | Vikrant Bhairav</title>
+  <meta name="description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, pictures from temples. Spread the glory of Bhairav with devotees worldwide." />
+  <link rel="canonical" href="https://vikrantbhairav.com/darshan.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .why-share {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .why-card {
+      background: rgba(200,144,42,0.05);
+      border: 1px solid rgba(200,144,42,0.15);
+      padding: 1.2rem;
+      text-align: center;
+    }
+    .why-card .why-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+
+    .success-msg {
+      display: none;
+      background: rgba(200,144,42,0.1);
+      border: 1px solid var(--gold);
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .success-msg p { color: var(--gold-light); font-family: 'Cinzel', serif; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="/">॥ Vikrant Bhairav ॥</a>
+  <ul class="nav-links">
+    <li><a href="mantra.html">Mantra</a></li>
+    <li><a href="chalisa.html">Chalisa</a></li>
+    <li><a href="puja-vidhi.html">Puja Vidhi</a></li>
+    <li><a href="katha.html">Katha</a></li>
+    <li><a href="bhairav-ashtami.html">Ashtami</a></li>
+    <li><a href="darshan.html" class="active">Darshan</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <span class="page-header-label">॥ दर्शन एवं अनुभव ॥</span>
+  <h1>Share Your Darshan</h1>
+  <p>Have you visited Shri Vikrant Bhairav Ji at the Shipra bank in Ujjain? Share your experience, miracles, and temple photos with devotees worldwide.</p>
+  <div class="gold-divider">
+    <div class="gold-divider-line"></div>
+    <div class="gold-divider-gem"></div>
+    <div class="gold-divider-line"></div>
+  </div>
+</header>
+
+<main class="content-wrap">
+
+  <div class="content-section">
+    <h2>Why Share Your Experience?</h2>
+    <div class="why-share">
+      <div class="why-card">
+        <span class="why-icon">🙏</span>
+        <p>Sharing divine experiences strengthens faith for thousands of devotees across the world.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🔥</span>
+        <p>Every account of Bhairav's grace spreads his glory — it is itself a form of seva (service).</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">📸</span>
+        <p>Temple photos and darshan images inspire those who cannot visit sacred sites in person.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🌐</span>
+        <p>Builds a living archive of modern-day miracles and devotion for future generations.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <h2>Submit Your Darshan</h2>
+    <p style="margin-bottom:1.5rem;color:var(--text-dim);font-size:0.88rem;">Your name is optional — you may share anonymously. All submissions are reviewed before publishing.</p>
+
+    <form class="darshan-form" id="darshan-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-group">
+        <label for="name">Your Name (optional)</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Ramesh Kumar, Delhi" />
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location / Temple *</label>
+        <input type="text" id="location" name="location" required placeholder="e.g. Kaal Bhairav Mandir, Varanasi" />
+      </div>
+
+      <div class="form-group">
+        <label for="type">Type of Experience *</label>
+        <select id="type" name="type" required>
+          <option value="" disabled selected>Select experience type</option>
+          <option value="miracle">Miracle / Answered Prayer</option>
+          <option value="darshan">Temple Darshan</option>
+          <option value="dream">Dream / Vision</option>
+          <option value="sadhana">Sadhana / Mantra Experience</option>
+          <option value="protection">Protection from Danger</option>
+          <option value="healing">Healing / Recovery</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="experience">Your Experience *</label>
+        <textarea id="experience" name="experience" required placeholder="Share your story, miracle, or darshan experience in as much detail as you feel comfortable..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email (optional — for follow-up only, never published)</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" />
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="consent" required style="width:auto;margin-right:0.5rem;" />
+          <span style="font-size:0.82rem;color:var(--text-dim);">I consent to this experience being shared on vikrantbhairav.com</span>
+        </label>
+      </div>
+
+      <button type="submit" class="form-submit">🔱 Submit Darshan</button>
+
+      <div class="success-msg" id="success-msg">
+        <p>॥ जय भैरव नाथ ॥</p>
+        <p style="font-family:'Raleway',sans-serif;font-size:0.85rem;color:var(--text-dim);margin-top:0.5rem;">Your darshan has been received. Lord Bhairav's blessings be upon you and your family.</p>
+      </div>
+    </form>
+  </div>
+
+  <div class="content-section">
+    <h2>Share a Temple Photo</h2>
+    <p>Have darshan photos from a Bhairav temple? Send them to us directly by email and we will add them to the gallery with your credit (or anonymously if you prefer).</p>
+    <div style="margin-top:1.2rem;background:rgba(0,0,0,0.3);border:1px solid rgba(200,144,42,0.2);padding:1.2rem 1.5rem;">
+      <p style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:0.4rem;">SEND PHOTOS TO</p>
+      <p style="font-size:1rem;color:var(--text-light);">darshan@vikrantbhairav.com</p>
+      <p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.4rem;">Include the temple name, location, and your name (if you want credit). Photos should be min 800px wide.</p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <h2>Guidelines for Sharing</h2>
+    <ul>
+      <li>Share genuine experiences — no fictional stories</li>
+      <li>Be respectful in language; avoid derogatory content about any faith</li>
+      <li>Photos should be of temples, idols, nature, or personal puja setups — not selfies</li>
+      <li>You can share in Hindi or English</li>
+      <li>Experiences of all kinds are welcome — doubt, fear, wonder, and devotion alike</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <span class="footer-om">ॐ</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="mantra.html">Mantra</a>
+    <a href="chalisa.html">Chalisa</a>
+    <a href="puja-vidhi.html">Puja Vidhi</a>
+    <a href="katha.html">Katha</a>
+    <a href="bhairav-ashtami.html">Ashtami</a>
+    <a href="darshan.html">Darshan</a>
+  </div>
+  <p class="footer-copy">॥ जय भैरव नाथ ॥ &nbsp;·&nbsp; vikrantbhairav.com</p>
+</footer>
+
+<script>
+document.getElementById('darshan-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  document.getElementById('success-msg').style.display = 'block';
+  this.reset();
+});
+</script>
+
+</body>
+</html>
