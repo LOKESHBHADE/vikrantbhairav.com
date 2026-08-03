@@ -6,8 +6,18 @@
   <title>Share Your Darshan — Devotee Experiences | Vikrant Bhairav</title>
   <meta name="description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, pictures from temples. Spread the glory of Bhairav with devotees worldwide." />
   <link rel="canonical" href="https://vikrantbhairav.com/darshan.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikrantbhairav.com/darshan.html" />
+  <meta property="og:title" content="Share Your Darshan — Devotee Experiences | Vikrant Bhairav" />
+  <meta property="og:description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, pictures from temples. Spread the glory of Bhairav with devotees worldwide." />
+  <meta property="og:image" content="https://vikrantbhairav.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Share Your Darshan — Devotee Experiences" />
+  <meta name="twitter:description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, temple photos." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
     .why-share {
@@ -89,7 +99,7 @@
     <h2>Submit Your Darshan</h2>
     <p style="margin-bottom:1.5rem;color:var(--text-dim);font-size:0.88rem;">Your name is optional — you may share anonymously. All submissions are reviewed before publishing.</p>
 
-    <form class="darshan-form" id="darshan-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form class="darshan-form" id="darshan-form">
       <div class="form-group">
         <label for="name">Your Name (optional)</label>
         <input type="text" id="name" name="name" placeholder="e.g. Ramesh Kumar, Delhi" />
@@ -135,7 +145,7 @@
 
       <div class="success-msg" id="success-msg">
         <p>॥ जय भैरव नाथ ॥</p>
-        <p style="font-family:'Raleway',sans-serif;font-size:0.85rem;color:var(--text-dim);margin-top:0.5rem;">Your darshan has been received. Lord Bhairav's blessings be upon you and your family.</p>
+        <p style="font-family:'Raleway',sans-serif;font-size:0.85rem;color:var(--text-dim);margin-top:0.5rem;">Your email app should now open with your story pre-filled — please press Send there to complete your submission. Lord Bhairav's blessings be upon you and your family.</p>
       </div>
     </form>
   </div>
@@ -180,6 +190,25 @@
 <script>
 document.getElementById('darshan-form').addEventListener('submit', function(e) {
   e.preventDefault();
+  const name = document.getElementById('name').value.trim() || 'Anonymous';
+  const location = document.getElementById('location').value.trim();
+  const typeSelect = document.getElementById('type');
+  const type = typeSelect.options[typeSelect.selectedIndex].text;
+  const experience = document.getElementById('experience').value.trim();
+  const email = document.getElementById('email').value.trim();
+
+  const subject = 'Darshan Story — ' + location;
+  const body =
+    'Name: ' + name + '\n' +
+    'Location/Temple: ' + location + '\n' +
+    'Type of Experience: ' + type + '\n' +
+    'Email: ' + (email || 'not provided') + '\n\n' +
+    'Experience:\n' + experience;
+
+  window.location.href = 'mailto:darshan@vikrantbhairav.com'
+    + '?subject=' + encodeURIComponent(subject)
+    + '&body=' + encodeURIComponent(body);
+
   document.getElementById('success-msg').style.display = 'block';
   this.reset();
 });

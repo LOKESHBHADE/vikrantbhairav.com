@@ -7,12 +7,16 @@
   --gold-glow: #ffd700;
   --deep-red: #8b0000;
   --crimson: #c0392b;
-  --dark: #080808;
-  --darker: #030303;
-  --card-bg: #0d0800;
+  --dark: #0c0805;
+  --darker: #060302;
+  --card-bg: #100a02;
   --text-light: #f5e6c8;
   --text-dim: #a08060;
   --text-body: #c8b090;
+  --font-display: 'Cinzel Decorative', serif;
+  --font-label: 'Cinzel', serif;
+  --font-body: 'Crimson Pro', serif;
+  --font-ui: 'Raleway', sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -20,9 +24,20 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--darker);
   color: var(--text-light);
-  font-family: 'Raleway', sans-serif;
+  font-family: var(--font-ui);
   overflow-x: hidden;
   min-height: 100vh;
+  position: relative;
+}
+
+/* Vignette — deepens the corners for a mystical, candlelit feel */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 300;
+  background: radial-gradient(ellipse 80% 70% at 50% 40%, transparent 55%, rgba(0,0,0,0.6) 100%);
 }
 
 /* ── NAV ── */
@@ -42,7 +57,7 @@ body {
 }
 
 .nav-logo {
-  font-family: 'Cinzel Decorative', serif;
+  font-family: var(--font-display);
   font-size: clamp(0.75rem, 2vw, 1rem);
   background: linear-gradient(90deg, var(--gold-light), var(--gold));
   -webkit-background-clip: text;
@@ -61,7 +76,7 @@ body {
 }
 
 .nav-links a {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: clamp(0.55rem, 1.2vw, 0.72rem);
   letter-spacing: 0.18em;
   color: var(--text-dim);
@@ -88,7 +103,7 @@ body {
   pointer-events: none;
 }
 .page-header-label {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: 0.65rem;
   letter-spacing: 0.5em;
   color: var(--gold);
@@ -97,7 +112,7 @@ body {
   display: block;
 }
 .page-header h1 {
-  font-family: 'Cinzel Decorative', serif;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 6vw, 4rem);
   background: linear-gradient(180deg, #fff8e8 0%, var(--gold-light) 50%, var(--gold) 100%);
   -webkit-background-clip: text;
@@ -108,7 +123,8 @@ body {
 }
 .page-header p {
   margin-top: 1rem;
-  font-size: clamp(0.85rem, 2vw, 1rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
   color: var(--text-dim);
   max-width: 520px;
   margin-left: auto;
@@ -161,14 +177,14 @@ body {
   background: linear-gradient(180deg, var(--gold), transparent);
 }
 .content-section h2 {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: clamp(1rem, 3vw, 1.4rem);
   color: var(--gold-light);
   letter-spacing: 0.1em;
   margin-bottom: 1.2rem;
 }
 .content-section h3 {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: 0.9rem;
   color: var(--gold);
   letter-spacing: 0.15em;
@@ -177,10 +193,11 @@ body {
 }
 .content-section p,
 .content-section li {
-  font-size: clamp(0.88rem, 2vw, 1rem);
-  line-height: 1.95;
+  font-family: var(--font-body);
+  font-size: clamp(0.98rem, 2.2vw, 1.15rem);
+  line-height: 1.85;
   color: var(--text-body);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
 }
 .content-section ul,
 .content-section ol {
@@ -198,20 +215,21 @@ body {
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   line-height: 2.1;
   color: var(--gold-light);
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   letter-spacing: 0.06em;
 }
 .mantra-transliteration {
   color: var(--text-dim);
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
   font-style: italic;
   margin-top: 0.5rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
 }
 .mantra-meaning {
   color: var(--text-body);
-  font-size: 0.88rem;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
   margin-top: 0.5rem;
   line-height: 1.8;
 }
@@ -224,7 +242,7 @@ body {
 }
 .verse:last-child { border-bottom: none; }
 .verse-num {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: 0.6rem;
   color: var(--crimson);
   letter-spacing: 0.3em;
@@ -257,7 +275,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: 0.75rem;
   font-weight: 700;
   flex-shrink: 0;
@@ -283,20 +301,23 @@ body {
 /* Tag chips */
 .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
 .tag {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   color: var(--gold);
   border: 1px solid rgba(200,144,42,0.3);
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
   text-transform: uppercase;
+  transition: border-color 0.25s, color 0.25s;
 }
+.tag:hover { border-color: var(--crimson); color: var(--gold-light); }
 
 /* ── DARSHAN FORM ── */
 .darshan-form { display: flex; flex-direction: column; gap: 1.2rem; }
 .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 .form-group label {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   color: var(--gold);
@@ -309,7 +330,7 @@ body {
   border: 1px solid rgba(200,144,42,0.25);
   color: var(--text-light);
   padding: 0.75rem 1rem;
-  font-family: 'Raleway', sans-serif;
+  font-family: var(--font-ui);
   font-size: 0.9rem;
   outline: none;
   transition: border-color 0.25s;
@@ -320,7 +341,7 @@ body {
 .form-group textarea:focus { border-color: var(--gold); }
 .form-group textarea { resize: vertical; min-height: 120px; }
 .form-submit {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: 0.75rem;
   letter-spacing: 0.3em;
   color: #000;
@@ -329,10 +350,15 @@ body {
   padding: 0.9rem 2.5rem;
   cursor: pointer;
   text-transform: uppercase;
-  transition: opacity 0.25s, transform 0.2s;
+  box-shadow: 0 0 0 rgba(192,57,43,0);
+  transition: opacity 0.25s, transform 0.2s, box-shadow 0.3s;
   align-self: flex-start;
 }
-.form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+.form-submit:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(192,57,43,0.35);
+}
 
 /* ── FOOTER ── */
 .site-footer {
@@ -349,7 +375,7 @@ body {
 }
 .footer-links { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
 .footer-links a {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-label);
   font-size: 0.62rem;
   letter-spacing: 0.2em;
   color: var(--text-dim);

@@ -45,7 +45,7 @@
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
     /* ── HOME-ONLY STYLES ── */
@@ -89,25 +89,26 @@
       line-height: 1;
     }
     .card-label {
-      font-family: 'Cinzel', serif;
+      font-family: var(--font-label);
       font-size: 0.6rem;
       letter-spacing: 0.35em;
       color: var(--crimson);
       text-transform: uppercase;
     }
     .card-title {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: var(--font-display);
       font-size: clamp(1rem, 2.5vw, 1.3rem);
       color: var(--gold-light);
       line-height: 1.2;
     }
     .card-desc {
-      font-size: 0.82rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
       color: var(--text-dim);
       line-height: 1.75;
     }
     .card-arrow {
-      font-family: 'Cinzel', serif;
+      font-family: var(--font-label);
       font-size: 0.62rem;
       letter-spacing: 0.25em;
       color: var(--gold);
@@ -121,30 +122,6 @@
     .content-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
   </style>
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --gold: #c8902a;
-      --gold-light: #f0c060;
-      --gold-glow: #ffd700;
-      --deep-red: #8b0000;
-      --crimson: #c0392b;
-      --dark: #080808;
-      --darker: #030303;
-      --text-light: #f5e6c8;
-      --text-dim: #a08060;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--darker);
-      color: var(--text-light);
-      font-family: 'Raleway', sans-serif;
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-
     /* ─── CANVAS PARTICLE BG ─── */
     #particle-canvas {
       position: fixed;
@@ -716,14 +693,14 @@
     <span class="card-icon">📖</span>
     <span class="card-label">Origin & Significance</span>
     <span class="card-title">Bhairav Katha</span>
-    <p class="card-desc">The Brahmahatya story, Vikrant Bhairav's meaning, Ashta Bhairav, Kshetrapala, and his eternal presence at Kashi.</p>
+    <p class="card-desc">The Brahmahatya story, Vikrant Bhairav's meaning, Ashta Bhairav, Kshetrapala, and his eternal presence on the Shipra bank at Ujjain.</p>
     <span class="card-arrow">Read Katha →</span>
   </a>
   <a class="content-card" href="bhairav-ashtami.html">
     <span class="card-icon">🌑</span>
     <span class="card-label">Festival & Dates</span>
     <span class="card-title">Bhairav Ashtami</span>
-    <p class="card-desc">Upcoming dates, significance, fasting rules, night vigil guide, and celebrations at the Kashi temple.</p>
+    <p class="card-desc">Upcoming dates, significance, fasting rules, night vigil guide, and celebrations at Bhairav temples across India.</p>
     <span class="card-arrow">View Dates →</span>
   </a>
   <a class="content-card" href="darshan.html">
