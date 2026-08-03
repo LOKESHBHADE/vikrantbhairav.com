@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Share Your Darshan — Devotee Experiences | Vikrant Bhairav</title>
-  <meta name="description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, pictures from temples. Spread the glory of Bhairav with devotees worldwide." />
+  <meta name="description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, and moments of grace. Spread his glory with devotees worldwide." />
   <link rel="canonical" href="https://vikrantbhairav.com/darshan.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://vikrantbhairav.com/darshan.html" />
   <meta property="og:title" content="Share Your Darshan — Devotee Experiences | Vikrant Bhairav" />
-  <meta property="og:description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, pictures from temples. Spread the glory of Bhairav with devotees worldwide." />
+  <meta property="og:description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, and moments of grace. Spread his glory with devotees worldwide." />
   <meta property="og:image" content="https://vikrantbhairav.com/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Share Your Darshan — Devotee Experiences" />
-  <meta name="twitter:description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, temple photos." />
+  <meta name="twitter:description" content="Share your divine experience with Lord Vikrant Bhairav — miracles, answered prayers, moments of grace." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -44,6 +44,42 @@
       margin-top: 1rem;
     }
     .success-msg p { color: var(--gold-light); font-family: 'Cinzel', serif; font-size: 0.9rem; }
+
+    .word-count {
+      align-self: flex-end;
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: -0.3rem;
+    }
+
+    .comment-list { display: flex; flex-direction: column; gap: 1rem; }
+    .comment-empty {
+      color: var(--text-dim);
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+    .comment-item {
+      background: rgba(0,0,0,0.3);
+      border-left: 2px solid var(--gold);
+      padding: 1rem 1.4rem;
+    }
+    .comment-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-body);
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+    .comment-meta {
+      margin-top: 0.5rem;
+      font-family: var(--font-label);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
   </style>
 </head>
 <body>
@@ -64,7 +100,7 @@
 <header class="page-header">
   <span class="page-header-label">॥ दर्शन एवं अनुभव ॥</span>
   <h1>Share Your Darshan</h1>
-  <p>Have you visited Shri Vikrant Bhairav Ji at the Shipra bank in Ujjain? Share your experience, miracles, and temple photos with devotees worldwide.</p>
+  <p>Have you visited Shri Vikrant Bhairav Ji at the Shipra bank in Ujjain? Share your experience or miracle with devotees worldwide, in a hundred words or fewer.</p>
   <div class="gold-divider">
     <div class="gold-divider-line"></div>
     <div class="gold-divider-gem"></div>
@@ -97,8 +133,8 @@
   </div>
 
   <div class="content-section">
-    <h2>Submit Your Darshan</h2>
-    <p style="margin-bottom:1.5rem;color:var(--text-dim);font-size:0.88rem;">Your name is optional — you may share anonymously. All submissions are reviewed before publishing.</p>
+    <h2>Leave a Comment</h2>
+    <p style="margin-bottom:1.5rem;color:var(--text-dim);font-size:0.88rem;">Your name is optional — you may share anonymously. Keep it to 100 words.</p>
 
     <form class="darshan-form" id="darshan-form">
       <div class="form-group">
@@ -107,57 +143,32 @@
       </div>
 
       <div class="form-group">
-        <label for="location">Location / Temple *</label>
-        <input type="text" id="location" name="location" required placeholder="e.g. Kaal Bhairav Mandir, Varanasi" />
-      </div>
-
-      <div class="form-group">
-        <label for="type">Type of Experience *</label>
-        <select id="type" name="type" required>
-          <option value="" disabled selected>Select experience type</option>
-          <option value="miracle">Miracle / Answered Prayer</option>
-          <option value="darshan">Temple Darshan</option>
-          <option value="dream">Dream / Vision</option>
-          <option value="sadhana">Sadhana / Mantra Experience</option>
-          <option value="protection">Protection from Danger</option>
-          <option value="healing">Healing / Recovery</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="experience">Your Experience *</label>
-        <textarea id="experience" name="experience" required placeholder="Share your story, miracle, or darshan experience in as much detail as you feel comfortable..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email (optional — for follow-up only, never published)</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com" />
+        <label for="comment">Your Comment *</label>
+        <textarea id="comment" name="comment" required maxlength="800" placeholder="Share your darshan, experience, or a word of devotion — up to 100 words..."></textarea>
+        <span class="word-count" id="word-count">0 / 100 words</span>
       </div>
 
       <div class="form-group">
         <label>
           <input type="checkbox" name="consent" required style="width:auto;margin-right:0.5rem;" />
-          <span style="font-size:0.82rem;color:var(--text-dim);">I consent to this experience being shared on vikrantbhairav.com</span>
+          <span style="font-size:0.82rem;color:var(--text-dim);">I consent to this comment being shown on vikrantbhairav.com</span>
         </label>
       </div>
 
-      <button type="submit" class="form-submit">🔱 Submit Darshan</button>
+      <button type="submit" class="form-submit">🔱 Post Comment</button>
 
       <div class="success-msg" id="success-msg">
         <p>॥ जय भैरव नाथ ॥</p>
-        <p style="font-family:'Raleway',sans-serif;font-size:0.85rem;color:var(--text-dim);margin-top:0.5rem;">Your email app should now open with your story pre-filled — please press Send there to complete your submission. Lord Bhairav's blessings be upon you and your family.</p>
+        <p style="font-family:'Raleway',sans-serif;font-size:0.85rem;color:var(--text-dim);margin-top:0.5rem;">Your comment has been posted below. Lord Bhairav's blessings be upon you and your family.</p>
       </div>
     </form>
   </div>
 
   <div class="content-section">
-    <h2>Share a Temple Photo</h2>
-    <p>Have darshan photos from a Bhairav temple? Send them to us directly by email and we will add them to the gallery with your credit (or anonymously if you prefer).</p>
-    <div style="margin-top:1.2rem;background:rgba(0,0,0,0.3);border:1px solid rgba(200,144,42,0.2);padding:1.2rem 1.5rem;">
-      <p style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:0.4rem;">SEND PHOTOS TO</p>
-      <p style="font-size:1rem;color:var(--text-light);">darshan@vikrantbhairav.com</p>
-      <p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.4rem;">Include the temple name, location, and your name (if you want credit). Photos should be min 800px wide.</p>
+    <h2>Devotee Comments</h2>
+    <p style="margin-bottom:1rem;color:var(--text-dim);font-size:0.8rem;">Comments are saved on this device only, not shared publicly across visitors.</p>
+    <div id="comment-list" class="comment-list">
+      <p class="comment-empty" id="comment-empty">No comments yet — be the first to share.</p>
     </div>
   </div>
 
@@ -190,30 +201,83 @@
 </footer>
 
 <script>
-document.getElementById('darshan-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const name = document.getElementById('name').value.trim() || 'Anonymous';
-  const location = document.getElementById('location').value.trim();
-  const typeSelect = document.getElementById('type');
-  const type = typeSelect.options[typeSelect.selectedIndex].text;
-  const experience = document.getElementById('experience').value.trim();
-  const email = document.getElementById('email').value.trim();
+(function(){
+  const MAX_WORDS = 100;
+  const commentEl = document.getElementById('comment');
+  const wordCountEl = document.getElementById('word-count');
+  const listEl = document.getElementById('comment-list');
+  const emptyEl = document.getElementById('comment-empty');
+  const form = document.getElementById('darshan-form');
 
-  const subject = 'Darshan Story — ' + location;
-  const body =
-    'Name: ' + name + '\n' +
-    'Location/Temple: ' + location + '\n' +
-    'Type of Experience: ' + type + '\n' +
-    'Email: ' + (email || 'not provided') + '\n\n' +
-    'Experience:\n' + experience;
+  function wordsOf(text) {
+    return text.trim().split(/\s+/).filter(Boolean);
+  }
 
-  window.location.href = 'mailto:darshan@vikrantbhairav.com'
-    + '?subject=' + encodeURIComponent(subject)
-    + '&body=' + encodeURIComponent(body);
+  function updateWordCount() {
+    const words = wordsOf(commentEl.value);
+    if (words.length > MAX_WORDS) {
+      commentEl.value = words.slice(0, MAX_WORDS).join(' ');
+    }
+    const count = wordsOf(commentEl.value).length;
+    wordCountEl.textContent = count + ' / ' + MAX_WORDS + ' words';
+    wordCountEl.style.color = count >= MAX_WORDS ? 'var(--crimson)' : 'var(--text-dim)';
+  }
+  commentEl.addEventListener('input', updateWordCount);
 
-  document.getElementById('success-msg').style.display = 'block';
-  this.reset();
-});
+  function loadComments() {
+    try {
+      return JSON.parse(localStorage.getItem('darshan-comments') || '[]');
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveComments(comments) {
+    localStorage.setItem('darshan-comments', JSON.stringify(comments));
+  }
+
+  function renderComments() {
+    const comments = loadComments();
+    if (comments.length === 0) {
+      emptyEl.style.display = 'block';
+      listEl.querySelectorAll('.comment-item').forEach(el => el.remove());
+      return;
+    }
+    emptyEl.style.display = 'none';
+    listEl.querySelectorAll('.comment-item').forEach(el => el.remove());
+    comments.slice().reverse().forEach(c => {
+      const item = document.createElement('div');
+      item.className = 'comment-item';
+      const dateStr = new Date(c.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      item.innerHTML =
+        '<p class="comment-text"></p>' +
+        '<p class="comment-meta">— <span class="comment-name"></span> · <span class="comment-date"></span></p>';
+      item.querySelector('.comment-text').textContent = c.text;
+      item.querySelector('.comment-name').textContent = c.name;
+      item.querySelector('.comment-date').textContent = dateStr;
+      listEl.appendChild(item);
+    });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim() || 'Anonymous';
+    const text = commentEl.value.trim();
+    if (!text) return;
+
+    const comments = loadComments();
+    comments.push({ name: name, text: text, date: Date.now() });
+    saveComments(comments);
+    renderComments();
+
+    document.getElementById('success-msg').style.display = 'block';
+    form.reset();
+    updateWordCount();
+  });
+
+  updateWordCount();
+  renderComments();
+})();
 </script>
 
 </body>
