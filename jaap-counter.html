@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaap Counter — Digital Mala for Mantra Chanting | Vikrant Bhairav</title>
+  <meta name="description" content="Free digital jaap counter for Bhairav mantra chanting. Tap to count, track malas of 108, and keep your sadhana on track — works on any device, saves your progress." />
+  <link rel="canonical" href="https://vikrantbhairav.com/jaap-counter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vikrantbhairav.com/jaap-counter.html" />
+  <meta property="og:title" content="Jaap Counter — Digital Mala for Mantra Chanting | Vikrant Bhairav" />
+  <meta property="og:description" content="Free digital jaap counter for Bhairav mantra chanting. Tap to count, track malas of 108, and keep your sadhana on track." />
+  <meta property="og:image" content="https://vikrantbhairav.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jaap Counter — Digital Mala for Mantra Chanting" />
+  <meta name="twitter:description" content="Free digital jaap counter for Bhairav mantra chanting. Tap to count and track malas of 108." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Pro:wght@300;400;500;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .jaap-panel {
+      text-align: center;
+      padding: 3rem 2rem 2.5rem;
+    }
+    .jaap-stats {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .jaap-malas {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+    .jaap-malas-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--gold-light);
+      text-shadow: 0 0 14px rgba(200,144,42,0.4);
+    }
+    .jaap-malas-label {
+      font-family: var(--font-label);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .jaap-button {
+      position: relative;
+      width: min(260px, 70vw);
+      height: min(260px, 70vw);
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 40%, #1a0e02 0%, #0a0500 70%);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      transition: transform 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .jaap-button:active { transform: scale(0.96); }
+
+    .jaap-ring {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .jaap-ring-bg {
+      fill: none;
+      stroke: rgba(200,144,42,0.15);
+      stroke-width: 4;
+    }
+    .jaap-ring-progress {
+      fill: none;
+      stroke: var(--gold-glow);
+      stroke-width: 4;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 6px rgba(255,215,0,0.6));
+      transition: stroke-dashoffset 0.25s ease;
+    }
+
+    .jaap-om {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+      text-shadow: 0 0 14px rgba(200,144,42,0.5);
+    }
+    .jaap-count {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 3.4rem);
+      color: var(--text-light);
+      line-height: 1;
+    }
+    .jaap-target-label {
+      font-family: var(--font-label);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    .jaap-button.jaap-complete { animation: jaap-flash 0.7s ease; }
+    @keyframes jaap-flash {
+      0%   { box-shadow: 0 0 0 0 rgba(192,57,43,0.6); }
+      50%  { box-shadow: 0 0 0 24px rgba(192,57,43,0); }
+      100% { box-shadow: 0 0 0 0 rgba(192,57,43,0); }
+    }
+
+    .jaap-hint {
+      margin-top: 1.5rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    .jaap-controls {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .jaap-target-select {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-start;
+    }
+    .jaap-target-select label {
+      font-family: var(--font-label);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .jaap-target-select select {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(200,144,42,0.25);
+      color: var(--text-light);
+      padding: 0.6rem 1rem;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+    }
+    .jaap-reset {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      background: transparent;
+      border: 1px solid rgba(200,144,42,0.35);
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .jaap-reset:hover { border-color: var(--crimson); color: var(--gold-light); }
+
+    @media (max-width: 480px) {
+      .jaap-controls { flex-direction: column; align-items: center; }
+      .jaap-target-select { align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="/">॥ Vikrant Bhairav ॥</a>
+  <ul class="nav-links">
+    <li><a href="mantra.html">Mantra</a></li>
+    <li><a href="chalisa.html">Chalisa</a></li>
+    <li><a href="puja-vidhi.html">Puja Vidhi</a></li>
+    <li><a href="katha.html">Katha</a></li>
+    <li><a href="bhairav-ashtami.html">Ashtami</a></li>
+    <li><a href="jaap-counter.html" class="active">Jaap Counter</a></li>
+    <li><a href="darshan.html">Darshan</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <span class="page-header-label">॥ जाप काउंटर ॥</span>
+  <h1>Jaap Counter</h1>
+  <p>A simple digital mala — tap to count your mantra japa, track rounds of 108, and stay present in your sadhana.</p>
+  <div class="gold-divider">
+    <div class="gold-divider-line"></div>
+    <div class="gold-divider-gem"></div>
+    <div class="gold-divider-line"></div>
+  </div>
+</header>
+
+<main class="content-wrap">
+
+  <div class="content-section jaap-panel">
+    <div class="jaap-stats">
+      <div class="jaap-malas">
+        <span class="jaap-malas-num" id="mala-count">0</span>
+        <span class="jaap-malas-label">Malas Completed</span>
+      </div>
+    </div>
+
+    <button class="jaap-button" id="jaap-btn" aria-label="Tap to count one repetition">
+      <svg class="jaap-ring" viewBox="0 0 200 200">
+        <circle class="jaap-ring-bg" cx="100" cy="100" r="92" />
+        <circle class="jaap-ring-progress" id="jaap-ring-progress" cx="100" cy="100" r="92" />
+      </svg>
+      <span class="jaap-om">ॐ</span>
+      <span class="jaap-count" id="jaap-count">0</span>
+      <span class="jaap-target-label" id="jaap-target-label">of 108</span>
+    </button>
+
+    <p class="jaap-hint">Tap the circle for each repetition of your mantra</p>
+
+    <div class="jaap-controls">
+      <div class="jaap-target-select">
+        <label for="jaap-target">Mala Size</label>
+        <select id="jaap-target">
+          <option value="27">27</option>
+          <option value="54">54</option>
+          <option value="108" selected>108</option>
+          <option value="1008">1008</option>
+        </select>
+      </div>
+      <button class="jaap-reset" id="jaap-reset" type="button">Reset Count</button>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <h2>How to Use</h2>
+    <ul>
+      <li>Tap the circle once for every repetition of your mantra</li>
+      <li>The ring fills as you approach one mala — change the mala size above if you prefer 27, 54, or 1008</li>
+      <li>When you complete a mala it's saved automatically and the counter resets for the next round</li>
+      <li>Your progress is saved on this device, so you can close the page and continue later</li>
+      <li>Works with any mantra — the <a href="mantra.html" style="color:var(--gold);">Bhairav mantras</a> are a good place to start</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <span class="footer-om">ॐ</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="mantra.html">Mantra</a>
+    <a href="chalisa.html">Chalisa</a>
+    <a href="puja-vidhi.html">Puja Vidhi</a>
+    <a href="katha.html">Katha</a>
+    <a href="bhairav-ashtami.html">Ashtami</a>
+    <a href="jaap-counter.html">Jaap Counter</a>
+    <a href="darshan.html">Darshan</a>
+  </div>
+  <p class="footer-copy">॥ जय भैरव नाथ ॥ &nbsp;·&nbsp; vikrantbhairav.com</p>
+</footer>
+
+<script>
+(function(){
+  const btn = document.getElementById('jaap-btn');
+  const countEl = document.getElementById('jaap-count');
+  const malaCountEl = document.getElementById('mala-count');
+  const targetLabelEl = document.getElementById('jaap-target-label');
+  const targetSelect = document.getElementById('jaap-target');
+  const resetBtn = document.getElementById('jaap-reset');
+  const ringProgress = document.getElementById('jaap-ring-progress');
+
+  const RADIUS = 92;
+  const CIRC = 2 * Math.PI * RADIUS;
+  ringProgress.style.strokeDasharray = String(CIRC);
+
+  let count = parseInt(localStorage.getItem('jaap-count') || '0', 10);
+  let malas = parseInt(localStorage.getItem('jaap-malas') || '0', 10);
+  let target = parseInt(localStorage.getItem('jaap-target') || '108', 10);
+  if (![27, 54, 108, 1008].includes(target)) target = 108;
+  targetSelect.value = String(target);
+
+  function render(){
+    countEl.textContent = count;
+    malaCountEl.textContent = malas;
+    targetLabelEl.textContent = 'of ' + target;
+    const progress = Math.min(count / target, 1);
+    ringProgress.style.strokeDashoffset = String(CIRC * (1 - progress));
+  }
+
+  function save(){
+    localStorage.setItem('jaap-count', String(count));
+    localStorage.setItem('jaap-malas', String(malas));
+    localStorage.setItem('jaap-target', String(target));
+  }
+
+  function celebrate(){
+    btn.classList.add('jaap-complete');
+    setTimeout(() => btn.classList.remove('jaap-complete'), 700);
+    if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+  }
+
+  btn.addEventListener('click', () => {
+    count++;
+    if (count >= target) {
+      malas++;
+      count = 0;
+      celebrate();
+    } else if (navigator.vibrate) {
+      navigator.vibrate(8);
+    }
+    save();
+    render();
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (!window.confirm('Reset your jaap count and completed malas?')) return;
+    count = 0;
+    malas = 0;
+    save();
+    render();
+  });
+
+  targetSelect.addEventListener('change', () => {
+    target = parseInt(targetSelect.value, 10);
+    count = 0;
+    save();
+    render();
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
