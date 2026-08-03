@@ -120,6 +120,50 @@
       transition: opacity 0.3s, transform 0.3s;
     }
     .content-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+
+    /* ── DARSHAN IMAGE ── */
+    .darshan-feature {
+      position: relative;
+      z-index: 2;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+    .darshan-frame {
+      position: relative;
+      border: 1px solid var(--gold);
+      box-shadow:
+        0 0 0 1px rgba(200,144,42,0.15),
+        0 0 60px 6px rgba(200,80,0,0.18);
+      padding: 10px;
+      background: linear-gradient(145deg, #0e0800, #1a0a00);
+    }
+    .darshan-frame::before,
+    .darshan-frame::after {
+      content: '';
+      position: absolute;
+      width: 28px; height: 28px;
+      border-color: var(--gold-glow);
+      border-style: solid;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .darshan-frame::before { top: 4px; left: 4px; border-width: 1px 0 0 1px; }
+    .darshan-frame::after  { bottom: 4px; right: 4px; border-width: 0 1px 1px 0; }
+    .darshan-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .darshan-caption {
+      margin-top: 1.2rem;
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
   </style>
   <style>
     /* ─── CANVAS PARTICLE BG ─── */
@@ -501,6 +545,14 @@
   </div>
 
   <div class="bottom-line"></div>
+</section>
+
+<!-- DARSHAN IMAGE -->
+<section class="darshan-feature">
+  <div class="darshan-frame">
+    <img src="vikrant-bhairav-darshan.jpg" alt="Shri Vikrant Bhairav Ji — live darshan at the Shipra bank temple, Ujjain" loading="lazy" />
+  </div>
+  <p class="darshan-caption">Shri Vikrant Bhairav Ji &middot; Shipra Bank Temple, Ujjain</p>
 </section>
 
 <!-- CONTENT GRID -->
